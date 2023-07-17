@@ -5,11 +5,11 @@
 <script src="01b_commandline_to_bash_files/libs/quarto-html/popper.min.js"></script>
 <script src="01b_commandline_to_bash_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="01b_commandline_to_bash_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="01b_commandline_to_bash_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet">
+<link href="01b_commandline_to_bash_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="01b_commandline_to_bash_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.649">
+  <meta name="generator" content="quarto-1.1.189">
 
-  <meta name="author" content="Roman E. Reggiardo">
+  <meta name="author" content="Roman E. Reggiardo, Vikas Peddu">
   <title>01b: From Command Line to Bash</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -381,14 +386,14 @@
     }
   </style>
 </head>
-<body>
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="center">
   <h1 class="title">01b: From Command Line to Bash</h1>
-  <p class="author">Roman E. Reggiardo</p>
-  <p class="date">18 July, 2022</p>
+  <p class="author">Roman E. Reggiardo, Vikas Peddu</p>
+  <p class="date">16 July, 2023</p>
 </section>
 
 <section id="scenario-mutations" class="slide level2">
@@ -412,6 +417,9 @@
 <section id="reflection" class="slide level2">
 <h2>Reflection</h2>
 <p>The file you worked with in <a href="https://rreggiar.github.io/ucsc_scbc_2022/slides/01_command_line_and_bash/01a_file_explorer_to_cmdline.html#/title-slide">01a</a>, <code>talking.txt</code>, is in <code>FASTA</code> format.</p>
+<div class="cell">
+
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">head</span> <span class="at">-4</span> ../../data/talking.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -458,9 +466,9 @@
 </section>
 <section id="building-the-diagnostic-panel-gene_panel_database.fa" class="slide level2">
 <h2>Building the diagnostic panel: <code>gene_panel_database.fa</code></h2>
-<p>Your Lab team has uploaded the <code>gene_panel_database.fa</code> file to your <a href="https://raw.githubusercontent.com/rreggiar/ucsc_scbc_2022/master/data/gene_panel_database.fa">database</a></p>
+<p>Your Lab team has uploaded the <code>gene_panel_database.fa</code> file to <code>/media/fileshare/</code></p>
 <ul>
-<li>Download <code>gene_panel_database.fa</code> to your <code>SCBC_2022_dir/data</code> directory (using the command line)</li>
+<li>Copy <code>gene_panel_database.fa</code> to your <code>BSCC_2023_dir/data</code> directory (using the command line)</li>
 </ul>
 <p>take a few moments to explore its contents, are there any problems with the data that we need to address?</p>
 </section>
@@ -638,7 +646,7 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <li><p>Which is <em>fine</em>, but still has the <code>&gt;</code> from the <code>FASTA</code> format – not something we need anymore</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># cut -d [delimeter] -f [fields/columns] [input_file]</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">cut</span> <span class="at">-d</span><span class="st">'&gt;'</span> <span class="at">-f2</span> ../../data/final_gene_panel.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">'&gt;'</span> <span class="at">-f2</span> ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>gene,chromosome,start,stop,strand
 KRAS,chr12,25215441,25245384,-
@@ -653,7 +661,7 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <p><code>cut</code> can separate files based on <code>delimeters</code> that represent columns. It can also return only columns you want:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># cut -d [delimeter] -f [fields/columns] [input_file]</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">cut</span> <span class="at">-d</span><span class="st">'&gt;'</span> <span class="at">-f2</span> ../../data/final_gene_panel.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">cut</span> <span class="at">-d</span><span class="st">'&gt;'</span> <span class="at">-f2</span> ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>gene,chromosome,start,stop,strand
 KRAS,chr12,25215441,25245384,-
@@ -662,7 +670,7 @@ TP53,chr17,7661939,7676594,- </code></pre>
 </div>
 </div>
 <ul>
-<li>in this case, we want to cut the file by <code>&gt;</code> and keep only the right (second) slice of data: <code>-f2</code></li>
+<li>In this case, we want to cut the file by <code>&gt;</code> and keep only the right (second) slice of data: <code>-f2</code></li>
 </ul>
 </section>
 <section id="practice-05" class="slide level2">
@@ -671,7 +679,7 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <li>Run:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">cut</span> <span class="at">-d</span><span class="st">'&gt;'</span> <span class="at">-f1</span> ../../data/final_gene_panel.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">'&gt;'</span> <span class="at">-f1</span> ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>gene,chromosome,start,stop,strand
 KRAS,chr12,25215441,25245384,-
@@ -731,14 +739,14 @@ TP53,7676594,- </code></pre>
 </ol>
 <p>instead, we can combine these commands with the <code>pipe</code> operator: <code>|</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">grep</span> <span class="st">'KRAS'</span> ../../data/gene_panel_database.fa <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">'&gt;'</span> <span class="at">-f2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">grep</span> <span class="st">'KRAS'</span> ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/gene_panel_database.fa <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">'&gt;'</span> <span class="at">-f2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>KRAS,chr12,25215441,25245384,-</code></pre>
 </div>
 </div>
 </section>
-<section id="complex-commands-piping" class="slide level2">
-<h2>Complex commands: <code>piping</code></h2>
+<section id="complex-commands-pipes" class="slide level2">
+<h2>Complex commands: <code>Pipes</code></h2>
 <p>Imagine a literal piece of plumbing connecting the <code>output</code> of one command to the <code>input</code> of another. This is the <code>|</code> operator’s function</p>
 <ul>
 <li><code>|</code> takes the output from the left side and uses it as input on the right:</li>
@@ -755,8 +763,8 @@ TP53,7676594,- </code></pre>
 <span id="cb41-2"><a href="#cb41-2"></a><span class="bu">pwd</span></span>
 <span id="cb41-3"><a href="#cb41-3"></a><span class="bu">pwd</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span>/ <span class="at">-f8</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d_</span> <span class="at">-f5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/Users/rreggiar/Documents/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash
-bash</code></pre>
+<pre><code>/Users/vikas/Documents/UCSC/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash
+slides</code></pre>
 </div>
 </div>
 </section>
@@ -834,7 +842,8 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <li><p>We won’t go into detail here, safe to use the following command to <code>unzip</code> the archive into the original multiple-file format</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">tar</span> <span class="at">-zxvf</span> patient_database.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># located in /media/fileshare/patient_database.tar.gz</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="fu">tar</span> <span class="at">-zxvf</span> patient_database.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="working-with-multiple-files-in-directory-wildcards" class="slide level2">
@@ -844,17 +853,17 @@ TP53,chr17,7661939,7676594,- </code></pre>
 </ul>
 <p>Matching everything that begins with <code>4</code> or <code>12</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">cat</span> ../../data/patient_database/4<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">cat</span> ../../data/patient_database//4<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>patient_id,gene,age,sex
 4,KRAS,74,F</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">ls</span> ../../data/patient_database/12<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">ls</span> ../../data/patient_database//12<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/12_TP53healthy_card.csv
-../../data/patient_database/12_TP53mut_card.csv</code></pre>
+<pre><code>../../data/patient_database//12_TP53healthy_card.csv
+../../data/patient_database//12_TP53mut_card.csv</code></pre>
 </div>
 </div>
 </section>
@@ -862,28 +871,28 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <h2>Grob continued <code>*</code></h2>
 <p>Matching everything with <code>healthy</code> in it</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">ls</span> ../../data/patient_database/<span class="pp">*</span>healthy<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">ls</span> ../../data/patient_database//<span class="pp">*</span>healthy<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/10_TP53healthy_card.csv
-../../data/patient_database/11_TP53healthy_card.csv
-../../data/patient_database/12_TP53healthy_card.csv</code></pre>
+<pre><code>../../data/patient_database//10_TP53healthy_card.csv
+../../data/patient_database//11_TP53healthy_card.csv
+../../data/patient_database//12_TP53healthy_card.csv</code></pre>
 </div>
 </div>
 <p>Matching everything that ends in <code>.csv</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1"></a><span class="co"># and truncating a little since there are alot</span></span>
-<span id="cb52-2"><a href="#cb52-2"></a><span class="fu">ls</span> ../../data/patient_database/<span class="pp">*</span>.csv <span class="kw">|</span> <span class="fu">head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-2"><a href="#cb52-2"></a><span class="fu">ls</span> ../../data/patient_database//<span class="pp">*</span>.csv <span class="kw">|</span> <span class="fu">head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/10_TP53healthy_card.csv
-../../data/patient_database/10_TP53mut_card.csv
-../../data/patient_database/11_TP53healthy_card.csv
-../../data/patient_database/11_TP53mut_card.csv
-../../data/patient_database/12_TP53healthy_card.csv
-../../data/patient_database/12_TP53mut_card.csv
-../../data/patient_database/1_KRASmut_card.csv
-../../data/patient_database/2_KRASmut_card.csv
-../../data/patient_database/3_KRASmut_card.csv
-../../data/patient_database/4_KRASmut_card.csv</code></pre>
+<pre><code>../../data/patient_database//10_TP53healthy_card.csv
+../../data/patient_database//10_TP53mut_card.csv
+../../data/patient_database//11_TP53healthy_card.csv
+../../data/patient_database//11_TP53mut_card.csv
+../../data/patient_database//12_TP53healthy_card.csv
+../../data/patient_database//12_TP53mut_card.csv
+../../data/patient_database//1_KRASmut_card.csv
+../../data/patient_database//2_KRASmut_card.csv
+../../data/patient_database//3_KRASmut_card.csv
+../../data/patient_database//4_KRASmut_card.csv</code></pre>
 </div>
 </div>
 </section>
@@ -893,21 +902,21 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <h3 id="output">output</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/10_TP53mut_card.csv
-../../data/patient_database/11_TP53mut_card.csv
-../../data/patient_database/12_TP53mut_card.csv
-../../data/patient_database/1_KRASmut_card.csv
-../../data/patient_database/2_KRASmut_card.csv
-../../data/patient_database/3_KRASmut_card.csv
-../../data/patient_database/4_KRASmut_card.csv
-../../data/patient_database/5_EGFRmut_card.csv
-../../data/patient_database/6_EGFRmut_card.csv
-../../data/patient_database/7_EGFRmut_card.csv
-../../data/patient_database/8_EGFRmut_card.csv
-../../data/patient_database/9_EGFRmut_card.csv
-../../data/patient_database/t_EGFRmut_card.csv
-../../data/patient_database/t_KRASmut_card.csv
-../../data/patient_database/t_TP53mut_card.csv</code></pre>
+<pre><code>../../data/patient_database//10_TP53mut_card.csv
+../../data/patient_database//11_TP53mut_card.csv
+../../data/patient_database//12_TP53mut_card.csv
+../../data/patient_database//1_KRASmut_card.csv
+../../data/patient_database//2_KRASmut_card.csv
+../../data/patient_database//3_KRASmut_card.csv
+../../data/patient_database//4_KRASmut_card.csv
+../../data/patient_database//5_EGFRmut_card.csv
+../../data/patient_database//6_EGFRmut_card.csv
+../../data/patient_database//7_EGFRmut_card.csv
+../../data/patient_database//8_EGFRmut_card.csv
+../../data/patient_database//9_EGFRmut_card.csv
+../../data/patient_database//t_EGFRmut_card.csv
+../../data/patient_database//t_KRASmut_card.csv
+../../data/patient_database//t_TP53mut_card.csv</code></pre>
 </div>
 </div>
 </section>
@@ -918,14 +927,14 @@ TP53,chr17,7661939,7676594,- </code></pre>
 </ul>
 <p>Only double digit patient ID numbers</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">ls</span> ../../data/patient_database/<span class="pp">??</span>_<span class="pp">*</span>.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">ls</span> ../../data/patient_database//<span class="pp">??</span>_<span class="pp">*</span>.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/10_TP53healthy_card.csv
-../../data/patient_database/10_TP53mut_card.csv
-../../data/patient_database/11_TP53healthy_card.csv
-../../data/patient_database/11_TP53mut_card.csv
-../../data/patient_database/12_TP53healthy_card.csv
-../../data/patient_database/12_TP53mut_card.csv</code></pre>
+<pre><code>../../data/patient_database//10_TP53healthy_card.csv
+../../data/patient_database//10_TP53mut_card.csv
+../../data/patient_database//11_TP53healthy_card.csv
+../../data/patient_database//11_TP53mut_card.csv
+../../data/patient_database//12_TP53healthy_card.csv
+../../data/patient_database//12_TP53mut_card.csv</code></pre>
 </div>
 </div>
 </section>
@@ -933,20 +942,20 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <h2>More limited matching: number of characters <code>???</code></h2>
 <p>Only single digit patient ID numbers</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">ls</span> ../../data/patient_database/<span class="pp">?</span>_<span class="pp">*</span>.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">ls</span> ../../data/patient_database//<span class="pp">?</span>_<span class="pp">*</span>.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/1_KRASmut_card.csv
-../../data/patient_database/2_KRASmut_card.csv
-../../data/patient_database/3_KRASmut_card.csv
-../../data/patient_database/4_KRASmut_card.csv
-../../data/patient_database/5_EGFRmut_card.csv
-../../data/patient_database/6_EGFRmut_card.csv
-../../data/patient_database/7_EGFRmut_card.csv
-../../data/patient_database/8_EGFRmut_card.csv
-../../data/patient_database/9_EGFRmut_card.csv
-../../data/patient_database/t_EGFRmut_card.csv
-../../data/patient_database/t_KRASmut_card.csv
-../../data/patient_database/t_TP53mut_card.csv</code></pre>
+<pre><code>../../data/patient_database//1_KRASmut_card.csv
+../../data/patient_database//2_KRASmut_card.csv
+../../data/patient_database//3_KRASmut_card.csv
+../../data/patient_database//4_KRASmut_card.csv
+../../data/patient_database//5_EGFRmut_card.csv
+../../data/patient_database//6_EGFRmut_card.csv
+../../data/patient_database//7_EGFRmut_card.csv
+../../data/patient_database//8_EGFRmut_card.csv
+../../data/patient_database//9_EGFRmut_card.csv
+../../data/patient_database//t_EGFRmut_card.csv
+../../data/patient_database//t_KRASmut_card.csv
+../../data/patient_database//t_TP53mut_card.csv</code></pre>
 </div>
 </div>
 </section>
@@ -956,21 +965,21 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <h3 id="output-1">output</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/10_TP53mut_card.csv
-../../data/patient_database/11_TP53mut_card.csv
-../../data/patient_database/12_TP53mut_card.csv
-../../data/patient_database/1_KRASmut_card.csv
-../../data/patient_database/2_KRASmut_card.csv
-../../data/patient_database/3_KRASmut_card.csv
-../../data/patient_database/4_KRASmut_card.csv
-../../data/patient_database/5_EGFRmut_card.csv
-../../data/patient_database/6_EGFRmut_card.csv
-../../data/patient_database/7_EGFRmut_card.csv
-../../data/patient_database/8_EGFRmut_card.csv
-../../data/patient_database/9_EGFRmut_card.csv
-../../data/patient_database/t_EGFRmut_card.csv
-../../data/patient_database/t_KRASmut_card.csv
-../../data/patient_database/t_TP53mut_card.csv</code></pre>
+<pre><code>../../data/patient_database//10_TP53mut_card.csv
+../../data/patient_database//11_TP53mut_card.csv
+../../data/patient_database//12_TP53mut_card.csv
+../../data/patient_database//1_KRASmut_card.csv
+../../data/patient_database//2_KRASmut_card.csv
+../../data/patient_database//3_KRASmut_card.csv
+../../data/patient_database//4_KRASmut_card.csv
+../../data/patient_database//5_EGFRmut_card.csv
+../../data/patient_database//6_EGFRmut_card.csv
+../../data/patient_database//7_EGFRmut_card.csv
+../../data/patient_database//8_EGFRmut_card.csv
+../../data/patient_database//9_EGFRmut_card.csv
+../../data/patient_database//t_EGFRmut_card.csv
+../../data/patient_database//t_KRASmut_card.csv
+../../data/patient_database//t_TP53mut_card.csv</code></pre>
 </div>
 </div>
 </section>
@@ -978,29 +987,29 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <h2>More specific matches: ranges <code>[]</code></h2>
 <p>Ranges of numbers:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">ls</span> ../../data/patient_database/[2-4]_<span class="pp">*</span>.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">ls</span> ../../data/patient_database//[2-4]_<span class="pp">*</span>.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/2_KRASmut_card.csv
-../../data/patient_database/3_KRASmut_card.csv
-../../data/patient_database/4_KRASmut_card.csv</code></pre>
+<pre><code>../../data/patient_database//2_KRASmut_card.csv
+../../data/patient_database//3_KRASmut_card.csv
+../../data/patient_database//4_KRASmut_card.csv</code></pre>
 </div>
 </div>
 <p>List of characters:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">ls</span> ../../data/patient_database/<span class="pp">*</span>_[T,K]<span class="pp">*</span>.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">ls</span> ../../data/patient_database//<span class="pp">*</span>_[T,K]<span class="pp">*</span>.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/10_TP53healthy_card.csv
-../../data/patient_database/10_TP53mut_card.csv
-../../data/patient_database/11_TP53healthy_card.csv
-../../data/patient_database/11_TP53mut_card.csv
-../../data/patient_database/12_TP53healthy_card.csv
-../../data/patient_database/12_TP53mut_card.csv
-../../data/patient_database/1_KRASmut_card.csv
-../../data/patient_database/2_KRASmut_card.csv
-../../data/patient_database/3_KRASmut_card.csv
-../../data/patient_database/4_KRASmut_card.csv
-../../data/patient_database/t_KRASmut_card.csv
-../../data/patient_database/t_TP53mut_card.csv</code></pre>
+<pre><code>../../data/patient_database//10_TP53healthy_card.csv
+../../data/patient_database//10_TP53mut_card.csv
+../../data/patient_database//11_TP53healthy_card.csv
+../../data/patient_database//11_TP53mut_card.csv
+../../data/patient_database//12_TP53healthy_card.csv
+../../data/patient_database//12_TP53mut_card.csv
+../../data/patient_database//1_KRASmut_card.csv
+../../data/patient_database//2_KRASmut_card.csv
+../../data/patient_database//3_KRASmut_card.csv
+../../data/patient_database//4_KRASmut_card.csv
+../../data/patient_database//t_KRASmut_card.csv
+../../data/patient_database//t_TP53mut_card.csv</code></pre>
 </div>
 </div>
 </section>
@@ -1010,15 +1019,15 @@ TP53,chr17,7661939,7676594,- </code></pre>
 <h3 id="output-2">output</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>../../data/patient_database/1_KRASmut_card.csv
-../../data/patient_database/2_KRASmut_card.csv
-../../data/patient_database/3_KRASmut_card.csv
-../../data/patient_database/4_KRASmut_card.csv
-../../data/patient_database/5_EGFRmut_card.csv
-../../data/patient_database/6_EGFRmut_card.csv
-../../data/patient_database/7_EGFRmut_card.csv
-../../data/patient_database/8_EGFRmut_card.csv
-../../data/patient_database/9_EGFRmut_card.csv</code></pre>
+<pre><code>../../data/patient_database//1_KRASmut_card.csv
+../../data/patient_database//2_KRASmut_card.csv
+../../data/patient_database//3_KRASmut_card.csv
+../../data/patient_database//4_KRASmut_card.csv
+../../data/patient_database//5_EGFRmut_card.csv
+../../data/patient_database//6_EGFRmut_card.csv
+../../data/patient_database//7_EGFRmut_card.csv
+../../data/patient_database//8_EGFRmut_card.csv
+../../data/patient_database//9_EGFRmut_card.csv</code></pre>
 </div>
 </div>
 </section>
@@ -1321,6 +1330,24 @@ TP53,chr17,7661939,7676594,- </code></pre>
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
@@ -1369,7 +1396,8 @@ TP53,chr17,7661939,7676594,- </code></pre>
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);

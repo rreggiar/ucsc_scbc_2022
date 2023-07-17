@@ -1,6 +1,6 @@
 ---
 title: "01b: From Command Line to Bash"
-author: "Roman E. Reggiardo"
+author: "Roman E. Reggiardo, Vikas Peddu"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
   revealjs:
@@ -37,6 +37,16 @@ Eventually, we're going to build a tool that Identifies patient DNA with Lung Ca
 ## Reflection
 
 The file you worked with in [01a](https://rreggiar.github.io/ucsc_scbc_2022/slides/01_command_line_and_bash/01a_file_explorer_to_cmdline.html#/title-slide), `talking.txt`, is in `FASTA` format.
+
+```{bash}
+cd /Users/vikas/Documents/UCSC/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash/BSCC_2023_dir
+wget --quiet https://raw.githubusercontent.com/rreggiar/ucsc_scbc_2022/master/data/talking.txt
+mv /Users/vikas/Documents/UCSC/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash/BSCC_2023_dir/talking.txt /Users/vikas/Documents/UCSC/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash/BSCC_2023_dir/data
+
+wget --quiet https://raw.githubusercontent.com/rreggiar/ucsc_scbc_2022/master/data/gene_panel_database.fa
+mv gene_panel_database.fa /Users/vikas/Documents/UCSC/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash/BSCC_2023_dir/data
+
+```
 
 ```{bash, echo=TRUE}
 head -4 ../../data/talking.txt
@@ -76,9 +86,9 @@ In this scenario, the Lab has sent you a `.fa` file that contains a number of ge
 
 ## Building the diagnostic panel: `gene_panel_database.fa`
 
-Your Lab team has uploaded the `gene_panel_database.fa` file to your [database](https://raw.githubusercontent.com/rreggiar/ucsc_scbc_2022/master/data/gene_panel_database.fa)
+Your Lab team has uploaded the `gene_panel_database.fa` file to `/media/fileshare/`
 
--   Download `gene_panel_database.fa` to your `SCBC_2022_dir/data` directory (using the command line)
+-   Copy `gene_panel_database.fa` to your `BSCC_2023_dir/data` directory (using the command line)
 
 take a few moments to explore its contents, are there any problems with the data that we need to address?
 
@@ -96,10 +106,10 @@ take a few moments to explore its contents, are there any problems with the data
 
 ## Job #1 output
 
-```{bash}
-rm ../../data/final_gene_panel.fa
-for gene in KRAS EGFR TP53; do grep $gene ../../data/gene_panel_database.fa >> ../../data/final_gene_panel.fa; done
-cat ../../data/final_gene_panel.fa
+```{bash, echo=F, eval=T, error=F}
+rm /Users/vikas/Documents/UCSC/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.fa
+for gene in KRAS EGFR TP53; do grep $gene /Users/vikas/Documents/UCSC/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash/BSCC_2023_dir/data/gene_panel_database.fa >> /Users/vikas/Documents/UCSC/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.fa; done
+cat /Users/vikas/Documents/UCSC/teaching/ucsc_scbc_2022/slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.fa
 ```
 
 ## 3 genes means we do everything 3x....but not by hand
@@ -213,7 +223,8 @@ for gene in KRAS EGFR TP53;do echo $gene; done
 accomplished in one `for loop`
 
 ```{bash}
-cat ../../data/final_gene_panel.fa
+
+cat ../../slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.fa
 ```
 
 ## A tool to work with columns: `cut`
@@ -221,14 +232,14 @@ cat ../../data/final_gene_panel.fa
 -   Your `final_gene_panel.csv` should look something like with **rows** on each line and columns separated by `,`:
 
     ```{bash}
-    cat ../../data/final_gene_panel.csv
+    cat ../../slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv
     ```
 
 -   Which is *fine*, but still has the `>` from the `FASTA` format -- not something we need anymore
 
     ```{bash, echo=T}
     # cut -d [delimeter] -f [fields/columns] [input_file]
-    cut -d'>' -f2 ../../data/final_gene_panel.csv
+    cut -d '>' -f2 ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv
     ```
 
 ## `cut`, explained
@@ -237,17 +248,17 @@ cat ../../data/final_gene_panel.fa
 
 ```{bash, echo=T}
 # cut -d [delimeter] -f [fields/columns] [input_file]
-cut -d'>' -f2 ../../data/final_gene_panel.csv
+cut -d'>' -f2 ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv
 ```
 
--   in this case, we want to cut the file by `>` and keep only the right (second) slice of data: `-f2`
+-   In this case, we want to cut the file by `>` and keep only the right (second) slice of data: `-f2`
 
 ## Practice 05:
 
 1.  Run:
 
 ```{bash, echo=T}
-cut -d'>' -f1 ../../data/final_gene_panel.csv
+cut -d '>' -f1 ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv
 ```
 
 -   why doesn't this return anything?
@@ -262,19 +273,19 @@ cut -d'>' -f1 ../../data/final_gene_panel.csv
 1.  
 
 ```{bash}
-cut -d'>' -f1 ../../data/final_gene_panel.csv
+cut -d '>' -f1 ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv
 ```
 
 2\.
 
 ```{bash}
-cut -d',' -f2 ../../data/final_gene_panel.csv
+cut -d',' -f2 ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv
 ```
 
 3\.
 
 ```{bash}
-cut -d',' -f1,4,5 ../../data/final_gene_panel.csv
+cut -d',' -f1,4,5 ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv
 ```
 
 ## One product, two steps
@@ -287,10 +298,10 @@ What we've just seen with `grep` and `cut` has split the one thing we want to do
 instead, we can combine these commands with the `pipe` operator: `|`
 
 ```{bash, echo=T}
-grep 'KRAS' ../../data/gene_panel_database.fa | cut -d'>' -f2
+grep 'KRAS' ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/gene_panel_database.fa | cut -d'>' -f2
 ```
 
-## Complex commands: `piping`
+## Complex commands: `Pipes`
 
 Imagine a literal piece of plumbing connecting the `output` of one command to the `input` of another. This is the `|` operator's function
 
@@ -324,8 +335,8 @@ pwd | cut -d/ -f8 | cut -d_ -f5
 ## Job #1.75 output:
 
 ```{bash}
-echo 'gene,chromosome,start,stop,strand' > ../../data/final_gene_panel.csv & for gene in KRAS EGFR TP53; do grep $gene ../../data/gene_panel_database.fa| cut -d'>' -f2 >> ../../data/final_gene_panel.csv; done
-cat ../../data/final_gene_panel.csv
+echo 'gene,chromosome,start,stop,strand' > ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv & for gene in KRAS EGFR TP53; do grep $gene ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/gene_panel_database.fa| cut -d'>' -f2 >> ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv; done
+cat ../..//slides/01_command_line_and_bash/BSCC_2023_dir/data/final_gene_panel.csv
 ```
 
 ## Reflection:
@@ -378,6 +389,7 @@ You might have seen these before: directories collapsed into a single, movable, 
 -   We won't go into detail here, safe to use the following command to `unzip` the archive into the original multiple-file format
 
 ```{bash, echo=T, eval=F}
+# located in /media/fileshare/patient_database.tar.gz
 tar -zxvf patient_database.tar.gz
 ```
 
@@ -388,11 +400,11 @@ tar -zxvf patient_database.tar.gz
 Matching everything that begins with `4` or `12`:
 
 ```{bash, echo=T}
-cat ../../data/patient_database/4*
+cat ../../data/patient_database//4*
 ```
 
 ```{bash, echo=T}
-ls ../../data/patient_database/12*
+ls ../../data/patient_database//12*
 ```
 
 ## Grob continued `*`
@@ -400,14 +412,14 @@ ls ../../data/patient_database/12*
 Matching everything with `healthy` in it
 
 ```{bash, echo=T}
-ls ../../data/patient_database/*healthy*
+ls ../../data/patient_database//*healthy*
 ```
 
 Matching everything that ends in `.csv`
 
 ```{bash, echo=T}
 # and truncating a little since there are alot
-ls ../../data/patient_database/*.csv | head
+ls ../../data/patient_database//*.csv | head
 ```
 
 ## Practice 06: Grob
@@ -417,7 +429,7 @@ Print all the file names that contain `mut`
 ### output
 
 ```{bash}
-ls ../../data/patient_database/*mut*
+ls ../../data/patient_database//*mut*
 ```
 
 ## More limited matching: number of characters `???`
@@ -427,7 +439,7 @@ ls ../../data/patient_database/*mut*
 Only double digit patient ID numbers
 
 ```{bash, echo=T}
-ls ../../data/patient_database/??_*.csv
+ls ../../data/patient_database//??_*.csv
 ```
 
 ## More limited matching: number of characters `???`
@@ -435,7 +447,7 @@ ls ../../data/patient_database/??_*.csv
 Only single digit patient ID numbers
 
 ```{bash, echo=T}
-ls ../../data/patient_database/?_*.csv
+ls ../../data/patient_database//?_*.csv
 ```
 
 ## Practice 07: `?`
@@ -445,7 +457,7 @@ Print all file names that contain `mut` without explicitly including `mut` in th
 ### output
 
 ```{bash}
-ls ../../data/patient_database/*_???????_card.csv
+ls ../../data/patient_database//*_???????_card.csv
 ```
 
 ## More specific matches: ranges `[]`
@@ -453,13 +465,13 @@ ls ../../data/patient_database/*_???????_card.csv
 Ranges of numbers:
 
 ```{bash, echo=T}
-ls ../../data/patient_database/[2-4]_*.csv
+ls ../../data/patient_database//[2-4]_*.csv
 ```
 
 List of characters:
 
 ```{bash, echo=T}
-ls ../../data/patient_database/*_[T,K]*.csv
+ls ../../data/patient_database//*_[T,K]*.csv
 ```
 
 ## Practice 08: `[]`
@@ -469,7 +481,7 @@ Print all file names that start with digits 1 - 9
 ### output
 
 ```{bash}
-ls ../../data/patient_database/[1-9]_*
+ls ../../data/patient_database//[1-9]_*
 ```
 
 ## Back to work...Job #2
