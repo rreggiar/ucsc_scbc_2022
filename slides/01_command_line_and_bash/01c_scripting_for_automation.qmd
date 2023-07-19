@@ -1,6 +1,6 @@
 ---
 title: "01c: Scripting for Automation"
-author: "Roman E. Reggiardo"
+author: "Roman E. Reggiardo, Vikas Peddu"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
   revealjs:
@@ -51,9 +51,9 @@ A bash **script** exists in a type of **text file**
 
 -   and need to be `executable` (more on this in a minute)
 
-### navigate into your `code` directory
+### navigate into your `/media/fileshare/` directory
 
-and download this [script](https://raw.githubusercontent.com/rreggiar/ucsc_scbc_2022/master/code/first_script.sh)
+and copy `first_script.sh` to `BSCC_2023_dir/code/`
 
 ## So, what do we do with new files?
 
@@ -148,7 +148,9 @@ grep '=' ../../code/first_script.sh
 
 Assigning **variables** is just `variable` = `value`
 
-**Try**: `echo $script_name` on the command line, what do you get?
+**Try**: Run the code block above
+
+Run `echo $script_name` on the command line, what do you get?
 
 ## Exploring `first_script.sh`: operations
 
@@ -285,7 +287,7 @@ Bash scripts have special values that correspond to **positions** on the command
 
 that let us implement command line **arguments**
 
--   to see more, download this [script](https://raw.githubusercontent.com/rreggiar/ucsc_scbc_2022/master/code/second_script.sh)
+-   to see more, copy `second_script.sh` from `/media/fileshare/`
 
 ## Checking out `second_script.sh`
 
