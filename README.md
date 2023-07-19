@@ -18,7 +18,7 @@ Here is the course material in HTML and/or PDF slide format.
 If you need to go from HTML (website-like interaction) please print to PDF from your browser.
 *Recommended to open these in a new tab: ctrl- or cmd- click*
 
-[Protected: Summer 2023 Lecture Recordings]()
+[Protected: Summer 2023 Lecture Recordings](https://drive.google.com/drive/folders/1RZjdzRFGXzZr6II2_v10Nr5F-tIvRdW5?usp=drive_link)
 
 #### Background and Setup resources
 ##### [VM link](https://learntech.ucsc.edu/bscc/#/) 
