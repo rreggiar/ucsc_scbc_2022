@@ -1,6 +1,6 @@
 ---
 title: "01d: Intermediate Bash Scripting"
-author: "Roman E. Reggiardo"
+author: "Roman E. Reggiardo, Vikas Peddu"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
   revealjs:
@@ -56,7 +56,7 @@ With an unzipped, executable ***freeBayes*** binary
 
 ```{bash, error=T, echo=T}
 # ignore the path, this is on my mac
-/opt/homebrew/Cellar/freebayes/1.3.6/bin/freebayes
+/usr/local/bin/freebayes
 ```
 
 ## But how do you use it?
@@ -65,7 +65,7 @@ complex software like this has A LOT of instructions:
 
 ```{bash, error=T, echo=T}
 # ignore the path, this is on my mac
-/opt/homebrew/Cellar/freebayes/1.3.6/bin/freebayes --help
+/usr/local/bin/freebayes --help
 ```
 
 ## Let's focus: what we need
@@ -90,13 +90,13 @@ complex software like this has A LOT of instructions:
 
 ## How do we get the data
 
--   `-b BAM files` The lab (me) has provided you with bam files hosted [here](http://public.gi.ucsc.edu/~rreggiar/samples_2.tar.gz) (more are avail.)
+-   `-b BAM files` The lab (me) has provided you with bam files are in `/media/fileshare/samples*.tar.gz`
 
--   `-f FASTA` The human genome reference is available from [this](ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz) link
+-   `-f FASTA` The human genome reference is available at `/media/fileshare/hg38.fa.gz`
 
 -   `-r regions` will be provided by you (we've already extracted them....)
 
-Download the human genome to a directory named `reference` and the extract the `.bam` file archive, deleting the original `.tar.gz`
+copy the human genome to a directory named `reference` and the extract the `.bam` file archive, deleting the original `.tar.gz`
 
 ```{bash, echo=T, eval=F}
 tar -zxvf sample_2.tar.gz
@@ -104,13 +104,13 @@ tar -zxvf sample_2.tar.gz
 
 ## Some special steps:
 
-Okay, we have limited space (5gb) so we need to proceed carefully:
+We need to proceed carefully:
 
--   Delete the `sample_2.tar.gz` archive
+-   `ls` your directory
 
--   `gunzip` the reference fasta file
+-   `gunzip` the reference fasta file:
 
-this should leave you with enough space to proceed
+    -   `gunzip <fasta>` -what did this do? (`ls` the directory again)
 
 ## Job #4: Variant Calling
 
